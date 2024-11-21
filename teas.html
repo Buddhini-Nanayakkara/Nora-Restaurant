@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Teas</title>
+    <!-- link to css-->
+    <link rel="stylesheet" href="home%20style.css">
+    <!-- java script-->
+    <script src="category.js"></script>      
+    <!--Box icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <style>
+        .center {
+            text-align: center;
+        }
+
+        #cart-icon {
+            cursor: pointer;
+        }
+
+        #cart-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ccc;
+            z-index: 1000;
+        }
+
+        .cart-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head><br>
+<div class="pc_img">
+    <img src="img/l1.png" alt="" class="pc_img">
+  </div>
+<body >
+             <!-- Add this line before </body> -->
+             <script src="cart.js"></script>
+
+             <center>
+                <div id="cart-icon" onclick="toggleCart()">
+                    <i class='bx bx-cart-alt' style='font-size: 2rem;'></i>
+                </div>
+                
+                <div id="cart-container">
+                    <h2>Shopping Cart</h2>
+                    <ul id="cart-items"></ul>
+                    <p>Total Amount: Rs.<span id="total">0.00</span></p><br>
+                    <a href="#" class="btn" onclick="confirmBuy()"> Buy Now</a>
+                </div> </center>
+
+    <p style="background-color:#cc6600; color:white; font-size:30px; margin-top:80px;text-align:center;margin:20px auto;"> Teas </p>
+    <div class="Properties-container container">
+        
+        <!-- Box 20 -->
+        <div class="box">
+            <img src="img/im38.jpeg" alt="">
+            <h3>Rs.239.99</h3>
+            <div class="content">
+                <div class="text">
+                    <h3>Green_Tea</h3>
+                    <input type="number" id="quantity1" value="1" min="1">
+                    <button class="add-to-cart" onclick="addToCart('Green_Tea', 239.99, 'quantity1')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box 20.1 -->
+        <div class="box">
+            <img src="img/im38.1.jpeg" alt="">
+            <h3>Rs.419.99</h3>
+            <div class="content">
+                <div class="text">
+                    <h3>Black_Tea</h3>
+                    <input type="number" id="quantity2" value="1" min="1">
+                    <button class="add-to-cart" onclick="addToCart('Black_Tea', 419.99, 'quantity2')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Box 20.2 -->
+        <div class="box">
+            <img src="img/im38.2.jpeg" alt="">
+            <h3>Rs.899.99</h3>
+            <div class="content">
+                <div class="text">
+                    <h3>Bubble_Tea</h3>
+                    <input type="number" id="quantity3" value="1" min="1">
+                    <button class="add-to-cart" onclick="addToCart('Bubble_Tea', 899.99, 'quantity3')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+    <script>
+        function addToCart(name, price, quantityId) {
+            // Get quantity from input field
+            var quantity = parseInt(document.getElementById(quantityId).value);
+
+            // Calculate total for the current item
+            var totalPrice = price * quantity;
+
+            // Create a new cart item
+            var cartItem = document.createElement("li");
+            cartItem.className = "cart-item";
+            cartItem.textContent = quantity + " x " + name + " - Rs." + totalPrice.toFixed(2);
+
+            // Add the item to the cart
+            document.getElementById("cart-items").appendChild(cartItem);
+
+            // Update the total amount
+            updateTotal(totalPrice);
+        }
+
+        function updateTotal(price) {
+            // Get the current total amount
+            var currentTotal = parseFloat(document.getElementById("total").textContent);
+
+            // Update the total amount
+            var newTotal = currentTotal + price;
+            document.getElementById("total").textContent = newTotal.toFixed(2);
+        }
+
+        function toggleCart() {
+            var cartContainer = document.getElementById("cart-container");
+            cartContainer.style.display = (cartContainer.style.display === "none" || cartContainer.style.display === "") ? "block" : "none";
+        }
+        
+     
+    function confirmBuy() {
+    var paymentMethod = prompt("Please choose a payment method:\n1. Cash on Delivery\n2. Bank Payment");
+
+    if (paymentMethod === null) {
+        alert("Purchase has been canceled.");
+        return;
+    }
+
+    switch (paymentMethod) {
+        case "1":
+            alert("Thank you for your purchase! You have chosen Cash on Delivery. The items will be delivered soon.");
+            resetCart();
+            break;
+        case "2":
+            alert("Thank you for your purchase! Redirecting to the bank payment page...");
+            // Redirect to payment.php
+            window.location.href = "payment.php";
+            break;
+        default:
+            alert("Invalid payment method. Purchase has been canceled.");
+            break;
+    }
+}
+
+function resetCart() {
+    // Reset the cart after successful purchase
+    document.getElementById("cart-items").innerHTML = "";
+    document.getElementById("total").textContent = "0.00";
+}
+
+
+function resetCart() {
+    // Reset the cart after successful purchase
+    document.getElementById("cart-items").innerHTML = "";
+    document.getElementById("total").textContent = "0.00";
+}
+
+    </script>
+
+    <!-- ... (unchanged footer and copyright sections) ... -->
+
+
+
+
+    <!--Footer-->
+<section class="footer">
+    <div class="footer-container container">
+        <h2><br><br>Nora Restaurant.lk<br><h10>Enjoy <b> Delicious Food </b><br> in Your Healthy Life.</h10></h2>
+        <div class="footer-box">
+            <h3><br><br>Quick links</h3>
+            <a href="booktable.php"><i class='bx bx-home-smile' ></i> Book A Table</a>
+            <a href="category.php"><i class='bx bx-building-house' ></i> Menu</a>
+            <a href="#">Rates <i class='bx bxs-star' ></i><i class='bx bxs-star' ></i><i class='bx bxs-star' ></i><i class='bx bxs-star' ></i><i class='bx bxs-star-half' ></i></a>
+        </div>
+        <div class="footer-box">
+            <h3><br><br>Locations</h3>
+            <a href="#"><i class='bx bx-location-plus' ></i> Colombo</a>
+            <a href="#"><i class='bx bx-location-plus' ></i> Baththramulla</a>
+            <a href="#"><i class='bx bx-location-plus' ></i> Mathra</a>
+        </div>
+        <div class="footer-box">
+            <h3><br><br>Contacts</h3>
+            <a href="#"><i class='bx bx-phone-call' ></i>  +94 312 255 615</a>
+            <a href="https://mail.google.com/mail/u/0/?pli=1#inbox?compose=CllgCJfrLfwMrDLmwnPbrFlthmVCwdxMblVGvLnnHwMgfMQkBtmsRndqqmGXtNHwCZJWFhHRrcL"><i class='bx bx-envelope' ></i> 	Nora_restaurant.lk@gmail.com</a>
+            <div class="social">
+            <a href="https://www.facebook.com"><i class='bx bxl-facebook'></i></a>
+            <a href="https://twitter.com/i/flow/login"><i class='bx bxl-twitter'></i></a>
+            <a href="https://www.instagram.com/accounts/login/"><i class='bx bxl-instagram'></i></a>
+            <a href="#"><i class='bx bx-qr'></i></a> 
+            </div>
+        </div>
+    </div>  
+</section>
+
+<!--copyright-->
+    <div class="copyright">
+        <p>&#169; Nora Restaurant.lk We Are Near You 2020</p>
+    
+    </div>
+
+</body>
+</html>
